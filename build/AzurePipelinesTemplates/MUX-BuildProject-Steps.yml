@@ -4,17 +4,15 @@ parameters:
   appxPackageDir: '$(build.artifactStagingDirectory)\$(buildConfiguration)\$(buildPlatform)\AppxPackages'
   buildOutputDir: '$(Build.SourcesDirectory)\BuildOutput'
   publishPath: '$(Build.ArtifactStagingDirectory)'
-  debug_pipeline: $(system.debug)
 
 steps:
-  - ${{if eq(parameters.debug_pipeline, 'true') }}:
-    - script: |
-        echo parameters.solutionPath = '${{ parameters.solutionPath }}'
-        echo parameters.nugetConfigPath = '${{ parameters.nugetConfigPath }}'
-        echo parameters.appxPackageDir = '${{ parameters.appxPackageDir }}'
-        echo parameters.buildOutputDir = '${{ parameters.buildOutputDir }}'
-        echo parameters.publishPath = '${{ parameters.publishPath }}'
-      displayName: 'BuildProject: Display parameters'
+  - script: |
+      echo parameters.solutionPath = '${{ parameters.solutionPath }}'
+      echo parameters.nugetConfigPath = '${{ parameters.nugetConfigPath }}'
+      echo parameters.appxPackageDir = '${{ parameters.appxPackageDir }}'
+      echo parameters.buildOutputDir = '${{ parameters.buildOutputDir }}'
+      echo parameters.publishPath = '${{ parameters.publishPath }}'
+    displayName: 'BuildProject: Display parameters'
 
   - task: CmdLine@1
     displayName: 'Display build machine environment variables'

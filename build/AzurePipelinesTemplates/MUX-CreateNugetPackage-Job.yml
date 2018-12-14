@@ -5,7 +5,6 @@ parameters:
   buildOutputDir: '$(Build.SourcesDirectory)\BuildOutput'
   nupkgdir: '$(build.ArtifactStagingDirectory)'
   publishPath: '$(build.ArtifactStagingDirectory)'
-  debug_pipeline: $(system.debug)
 
 jobs:
 - job: ${{ parameters.jobName }}
@@ -19,14 +18,13 @@ jobs:
       Write-Host "##vso[task.setvariable variable=buildrevision]$revision"
     displayName: 'Get build revision number'
   
-  - ${{if eq(parameters.debug_pipeline, 'true') }}:
-    - script: |
-        echo parameters.jobName '${{ parameters.jobName }}'
-        echo parameters.buildOutputDir '${{ parameters.buildOutputDir }}'
-        echo parameters.nupkgdir '${{ parameters.nupkgdir }}'
-        echo parameters.publishPath '${{ parameters.publishPath }}'
-        echo buildrevision=$(buildrevision)
-      displayName: 'CreateNugetPackage: Display parameters'
+  - script: |
+      echo parameters.jobName '${{ parameters.jobName }}'
+      echo parameters.buildOutputDir '${{ parameters.buildOutputDir }}'
+      echo parameters.nupkgdir '${{ parameters.nupkgdir }}'
+      echo parameters.publishPath '${{ parameters.publishPath }}'
+      echo buildrevision=$(buildrevision)
+    displayName: 'CreateNugetPackage: Display parameters'
 
   - task: DownloadBuildArtifacts@0 
     inputs: 
