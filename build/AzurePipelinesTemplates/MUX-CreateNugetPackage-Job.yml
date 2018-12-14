@@ -18,7 +18,7 @@ jobs:
       Write-Host "##vso[task.setvariable variable=buildrevision]$revision"
     displayName: 'Get build revision number'
   
-  - ${{if system.debug }}:
+  - ${{if eq(system.debug, 'true') }}:
     - script: |
         echo parameters.jobName '${{ parameters.jobName }}'
         echo parameters.buildOutputDir '${{ parameters.buildOutputDir }}'

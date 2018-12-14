@@ -6,7 +6,7 @@ parameters:
   publishPath: '$(Build.ArtifactStagingDirectory)'
 
 steps:
-  - ${{if system.debug }}:
+  - ${{if eq(system.debug, 'true') }}:
     - script: |
         echo parameters.solutionPath = '${{ parameters.solutionPath }}'
         echo parameters.nugetConfigPath = '${{ parameters.nugetConfigPath }}'
