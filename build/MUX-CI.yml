@@ -23,11 +23,22 @@ jobs:
         buildPlatform: 'arm64'
         buildConfiguration: 'Release'
 
+  variables:
+  - name: appxPackageDir
+    value: $(build.artifactStagingDirectory)\$(buildConfiguration)\$(buildPlatform)\AppxPackages
+  - name: buildOutputDir
+    value: $(Build.SourcesDirectory)\BuildOutput
+  - name: publishDir
+    value: $(Build.ArtifactStagingDirectory)
+
   steps:
   - template: AzurePipelinesTemplates\MUX-BuildProject-Steps.yml
     parameters:
       solutionPath: MUXControls.sln
       nugetConfigPath: nuget.config
+      appxPackageDir: $(appxPackageDir)
+      buildOutputDir: $(buildOutputDir)
+      publishDir: $(publishDir)
 
   - task: powershell@2
     displayName: 'Copy files to staging dir'

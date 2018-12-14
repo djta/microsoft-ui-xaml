@@ -1,9 +1,9 @@
 parameters:
   solutionPath: ''
   nugetConfigPath: ''
-  appxPackageDir: '$(build.artifactStagingDirectory)\$(buildConfiguration)\$(buildPlatform)\AppxPackages'
   buildOutputDir: '$(Build.SourcesDirectory)\BuildOutput'
-  publishPath: '$(Build.ArtifactStagingDirectory)'
+  publishDir: '$(Build.ArtifactStagingDirectory)'
+  appxPackageDir: '$(build.artifactStagingDirectory)\$(buildConfiguration)\$(buildPlatform)\AppxPackages'
 
 steps:
   - script: |
