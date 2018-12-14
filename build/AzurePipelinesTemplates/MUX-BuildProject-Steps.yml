@@ -4,9 +4,10 @@ parameters:
   appxPackageDir: '$(build.artifactStagingDirectory)\$(buildConfiguration)\$(buildPlatform)\AppxPackages'
   buildOutputDir: '$(Build.SourcesDirectory)\BuildOutput'
   publishPath: '$(Build.ArtifactStagingDirectory)'
+  debug_pipeline: $(system.debug)
 
 steps:
-  - ${{if eq($(system.debug), 'true') }}:
+  - ${{if eq(parameters.debug_pipeline, 'true') }}:
     - script: |
         echo parameters.solutionPath = '${{ parameters.solutionPath }}'
         echo parameters.nugetConfigPath = '${{ parameters.nugetConfigPath }}'
