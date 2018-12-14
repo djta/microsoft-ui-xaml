@@ -19,12 +19,27 @@ jobs:
     parameters:
       solutionPath: MUXControls.sln
       nugetConfigPath: nuget.config
-      copyFilesToStaging: true
 
+  - task: powershell@2
+    displayName: 'Copy files to staging dir'
+    inputs:
+      targetType: filePath
+      filePath: build\CopyFilesToStagingDir.ps1
+      arguments: -BuildOutputDir '$(buildOutputDir)' -PublishDir '$(Build.ArtifactStagingDirectory)' -Platform '$(buildPlatform)' -Configuration '$(buildConfiguration)'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish artifact: drop'
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'drop'
+
+# Create Nuget Package
 - template: AzurePipelinesTemplates\MUX-CreateNugetPackage-Job.yml
   parameters:
+    jobName: CreateNugetPackage
     dependsOn: Build
   
+# Build solution that depends on nuget package
 - template: AzurePipelinesTemplates\MUX-NugetReleaseTest-Job.yml
   parameters:
     dependsOn: CreateNugetPackage
