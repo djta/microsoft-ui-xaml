@@ -18,13 +18,14 @@ jobs:
       Write-Host "##vso[task.setvariable variable=buildrevision]$revision"
     displayName: 'Get build revision number'
   
-  - script: |
-      echo parameters.jobName '${{ parameters.jobName }}'
-      echo parameters.buildOutputDir '${{ parameters.buildOutputDir }}'
-      echo parameters.nupkgdir '${{ parameters.nupkgdir }}'
-      echo parameters.publishPath '${{ parameters.publishPath }}'
-      echo buildrevision=$(buildrevision)
-    displayName: Display parameters
+  - ${{if system.debug }}:
+    - script: |
+        echo parameters.jobName '${{ parameters.jobName }}'
+        echo parameters.buildOutputDir '${{ parameters.buildOutputDir }}'
+        echo parameters.nupkgdir '${{ parameters.nupkgdir }}'
+        echo parameters.publishPath '${{ parameters.publishPath }}'
+        echo buildrevision=$(buildrevision)
+      displayName: 'CreateNugetPackage: Display parameters'
 
   - task: DownloadBuildArtifacts@0 
     inputs: 
