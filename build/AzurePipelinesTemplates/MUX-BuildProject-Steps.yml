@@ -6,12 +6,14 @@ parameters:
   publishPath: '$(Build.ArtifactStagingDirectory)'
 
 steps:
-  - script: echo parameters.solutionPath = '${{ parameters.solutionPath }}'
-  - script: echo parameters.nugetConfigPath = '${{ parameters.nugetConfigPath }}'
-  - script: echo parameters.appxPackageDir = '${{ parameters.appxPackageDir }}'
-  - script: echo parameters.buildOutputDir = '${{ parameters.buildOutputDir }}'
-  - script: echo parameters.publishPath = '${{ parameters.publishPath }}'
-  - script: echo parameters.nugetVersion = '${{ parameters.nugetVersion }}'
+  - script: |
+      echo parameters.solutionPath = '${{ parameters.solutionPath }}'
+      echo parameters.nugetConfigPath = '${{ parameters.nugetConfigPath }}'
+      echo parameters.appxPackageDir = '${{ parameters.appxPackageDir }}'
+      echo parameters.buildOutputDir = '${{ parameters.buildOutputDir }}'
+      echo parameters.publishPath = '${{ parameters.publishPath }}'
+      echo parameters.nugetVersion = '${{ parameters.nugetVersion }}'
+      - displayName: Testing displayName
 
   - task: CmdLine@1
     displayName: 'Display build machine environment variables'
