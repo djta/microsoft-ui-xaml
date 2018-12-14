@@ -13,7 +13,7 @@ steps:
       echo parameters.buildOutputDir = '${{ parameters.buildOutputDir }}'
       echo parameters.publishPath = '${{ parameters.publishPath }}'
       echo parameters.nugetVersion = '${{ parameters.nugetVersion }}'
-      - displayName: Testing displayName
+    displayName: Display parameters
 
   - task: CmdLine@1
     displayName: 'Display build machine environment variables'

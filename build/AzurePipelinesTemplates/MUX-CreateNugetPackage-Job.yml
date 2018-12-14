@@ -24,6 +24,7 @@ jobs:
       echo parameters.nupkgdir '${{ parameters.nupkgdir }}'
       echo parameters.publishPath '${{ parameters.publishPath }}'
       echo buildrevision=$(buildrevision)
+    displayName: Display parameters
 
   - task: DownloadBuildArtifacts@0 
     inputs: 
