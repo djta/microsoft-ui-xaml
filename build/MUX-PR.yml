@@ -49,6 +49,7 @@ jobs:
   parameters:
     jobName: CreateNugetPackage
     dependsOn: Build
+    primaryBuildArch: x64
   
 # Build solution that depends on nuget package
 - template: AzurePipelinesTemplates\MUX-NugetReleaseTest-Job.yml

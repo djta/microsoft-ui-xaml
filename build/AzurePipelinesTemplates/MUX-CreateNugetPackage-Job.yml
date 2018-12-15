@@ -5,6 +5,9 @@ parameters:
   buildOutputDir: '$(Build.SourcesDirectory)\BuildOutput'
   nupkgdir: '$(build.ArtifactStagingDirectory)'
   publishPath: '$(build.ArtifactStagingDirectory)'
+# The "primary" build arch is the one that the nuspec gets its winmd, pri, and other neutral files from
+  primaryBuildArch: x86
+  buildFlavor: Release
 
 jobs:
 - job: ${{ parameters.jobName }}
@@ -38,7 +41,14 @@ jobs:
     inputs:
       targetType: filePath
       filePath: build\NuSpecs\build-nupkg.ps1
-      arguments: -BuildOutput '${{ parameters.buildOutputDir }}\drop' -OutputDir '${{ parameters.nupkgdir }}' -prereleaseversion prerelease -Subversion '$(buildrevision)' -SkipFrameworkPackage
+      arguments: > 
+        -BuildOutput '${{ parameters.buildOutputDir }}\drop' 
+        -OutputDir '${{ parameters.nupkgdir }}' 
+        -prereleaseversion prerelease 
+        -Subversion '$(buildrevision)' 
+        -SkipFrameworkPackage 
+        -BuildArch ${{ parameters.primaryBuildArch }}
+        -BuildFlavor ${{ parameters.buildFlavor }} 
 
   - task: PublishBuildArtifacts@1
     displayName: 'Publish artifact: nupkg'
