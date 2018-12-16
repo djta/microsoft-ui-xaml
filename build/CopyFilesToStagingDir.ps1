@@ -24,6 +24,10 @@ function PublishFile {
         }
         Copy-Item -Force $source $destinationDir
     }
+    else
+    {
+        Write-Host "Not copying '$source' to $destinationDir because it did not exist"
+    }
 }
 
 PublishFile $FullBuildOutput\Microsoft.UI.Xaml\Microsoft.UI.Xaml.dll $FullPublishDir\Microsoft.UI.Xaml\
