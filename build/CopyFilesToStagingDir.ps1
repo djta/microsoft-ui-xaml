@@ -34,8 +34,7 @@ PublishFile $FullBuildOutput\Microsoft.UI.Xaml\Microsoft.UI.Xaml.dll $FullPublis
 PublishFile $FullBuildOutput\Microsoft.UI.Xaml\Microsoft.UI.Xaml.pri $FullPublishDir\Microsoft.UI.Xaml\
 PublishFile $FullBuildOutput\Microsoft.UI.Xaml\sdk\Microsoft.UI.Xaml.winmd $FullPublishDir\Microsoft.UI.Xaml\sdk\
 PublishFile $FullBuildOutput\Microsoft.UI.Xaml\Generic.xaml $FullPublishDir\Microsoft.UI.Xaml\
-# Design dll always produces a dll into the x86 output dir
-PublishFile -IfExists "$($BuildOutputDir)\$($Configuration)\x86\Microsoft.UI.Xaml.Design\Microsoft.UI.Xaml.Design.dll" $FullPublishDir\Microsoft.UI.Xaml.Design\
+PublishFile -IfExists "$FullBuildOutput\Microsoft.UI.Xaml.Design\Microsoft.UI.Xaml.Design.dll" $FullPublishDir\Microsoft.UI.Xaml.Design\
 
 # Publish pdbs:
 $symbolsOutputDir = "$($FullPublishDir)\Symbols\"
